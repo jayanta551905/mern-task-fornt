@@ -7,7 +7,6 @@ class SessionHelper{
     }
 
 
-
     setUserDetails(UserDetails){
         localStorage.setItem("UserDetails",JSON.stringify(UserDetails))
     }

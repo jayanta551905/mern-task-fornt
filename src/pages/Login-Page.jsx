@@ -5,7 +5,7 @@ const LoginPage = () => {
     return (
         <Fragment>
             <MasterLayout>
-                <h1>hkdfs</h1>
+
             </MasterLayout>
         </Fragment>
     );
