@@ -80,7 +80,7 @@ const MasterLayout = (props) => {
                     <span className="side-bar-item-caption">Create New</span>
                 </NavLink>
 
-                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/all" >
+                <NavLink className={(navData) => navData.isActive ? "side-bar-item-active side-bar-item mt-2" : "side-bar-item mt-2" } to="/new" >
                     <BsListNested className="side-bar-item-icon" size={25} />
                     <span className="side-bar-item-caption">New Task</span>
                 </NavLink>

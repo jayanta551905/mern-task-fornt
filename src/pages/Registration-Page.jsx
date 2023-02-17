@@ -1,12 +1,13 @@
-import React, {Fragment} from 'react';
-import MasterLayout from "../components/MasterLayout/Master-Layout";
+import React, {Fragment, lazy, Suspense} from 'react';
+import LazyLoader from '../components/MasterLayout/LazyLoader';
+const Registration = lazy(() => import('../components/Registration/Registration'));
 
 const RegistrationPage = () => {
     return (
         <Fragment>
-            <MasterLayout>
-                <h1>hkdfs</h1>
-            </MasterLayout>
+                <Suspense fallback={<LazyLoader/>}>
+                    <Registration/>
+                </Suspense>
         </Fragment>
     );
 };

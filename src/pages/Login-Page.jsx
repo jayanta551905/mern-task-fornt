@@ -1,12 +1,13 @@
-import React, {Fragment} from 'react';
-import MasterLayout from "../components/MasterLayout/Master-Layout";
+import React, {Fragment, lazy, Suspense} from 'react';
+import LazyLoader from '../components/MasterLayout/LazyLoader';
+const Login = lazy(() => import('../components/Login/Login'));
 
 const LoginPage = () => {
     return (
         <Fragment>
-            <MasterLayout>
-
-            </MasterLayout>
+            <Suspense fallback={<LazyLoader/>}>
+                <Login/>
+            </Suspense>
         </Fragment>
     );
 };

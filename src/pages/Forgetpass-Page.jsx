@@ -1,12 +1,13 @@
-import React, {Fragment} from 'react';
-import MasterLayout from "../components/MasterLayout/Master-Layout";
+import React, {Fragment, lazy, Suspense} from 'react';
+import LazyLoader from '../components/MasterLayout/LazyLoader';
+const Forgetpass = lazy(() => import('../components/Forgetpass/Forgetpass'));
 
 const ForgetpassPage = () => {
     return (
         <Fragment>
-            <MasterLayout>
-                <h1>hkdfs</h1>
-            </MasterLayout>
+            <Suspense fallback={<LazyLoader/>}>
+                <Forgetpass/>
+            </Suspense>
         </Fragment>
     );
 };
