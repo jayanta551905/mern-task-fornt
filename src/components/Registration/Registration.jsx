@@ -1,7 +1,44 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Link } from 'react-router-dom';
+import {errorToast, isEmail, isEmpty, isMobile} from "../../helper/FormHelper";
+import {RegistrationRequest} from "../../APIRequest/APIRequest";
+import {useNavigate} from "react-router";
 
 const Registration = () => {
+
+    let emailRef, firstNameRef, lastNameRef, mobileRef, passwordRef = useRef();
+    let navigate = useNavigate();
+    const onRegistration = () => {
+        let email = emailRef.value;
+        let firstName = firstNameRef.value;
+        let lastName = lastNameRef.value;
+        let mobile = mobileRef.value;
+        let password = passwordRef.value;
+
+        if (isEmail(email)){
+            errorToast("Valid Email Required !");
+        }
+        else if (isEmpty(firstName)){
+            errorToast("First Name Required !");
+        }
+        else if (isEmpty(lastName)){
+            errorToast("Last Name Required !");
+        }
+        else if (!isMobile(mobile)){
+            errorToast("Invalid Mobile Number !");
+        }
+        else if (isEmpty(password)){
+            errorToast("Password Required !");
+        }
+        else {
+            RegistrationRequest(email, firstName, lastName, mobile, password, "").then((result)=>{
+                if (result===true){
+                    navigate("/login");
+                }
+            })
+        }
+    }
+
     return (
         <div className='container'>
             <div className='row justify-content-center'>
@@ -10,17 +47,17 @@ const Registration = () => {
                         <div className='card-body'>
                             <h4>Sign In</h4>
                             <br/>
-                            <input placeholder='User Email' className='form-control animated fadeInUp' type="email"/>
+                            <input ref={(input)=>emailRef=input} placeholder='User Email' className='form-control animated fadeInUp' type="email"/>
                             <br/>
-                            <input placeholder='First Name' className='form-control animated fadeInUp' type="text"/>
+                            <input ref={(input)=>firstNameRef=input} placeholder='First Name' className='form-control animated fadeInUp' type="text"/>
                             <br/>
-                            <input placeholder='Last Name' className='form-control animated fadeInUp' type="text"/>
+                            <input ref={(input)=>lastNameRef=input} placeholder='Last Name' className='form-control animated fadeInUp' type="text"/>
                             <br/>
-                            <input placeholder='Mobile' className='form-control animated fadeInUp' type="mobile"/>
+                            <input ref={(input)=>mobileRef=input} placeholder='Mobile' className='form-control animated fadeInUp' type="mobile"/>
                             <br/>
-                            <input placeholder='Password' className='form-control animated fadeInUp' type="password"/>
+                            <input ref={(input)=>passwordRef=input} placeholder='Password' className='form-control animated fadeInUp' type="password"/>
                             <br/>
-                            <button className='btn btn-primary w-100 animated fadeInUp float-end'>Sign Up</button>
+                            <button onClick={onRegistration} className='btn btn-primary w-100 animated fadeInUp float-end'>Sign Up</button>
                             <div className='text-center w-100'>
                                 <Link className='text-center animated fadeInUp to=' to="/login">Sign in</Link>
                                 <br/>

@@ -6,7 +6,7 @@ import {BsHourglass, BsListNested} from "react-icons/bs";
 import logo from "../../assets/images/logo.svg";
 import {MdOutlineCancelPresentation} from "react-icons/md";
 import {RiDashboardLine} from "react-icons/ri";
-import {getUserDetails, removeSessions} from "../../helper/SessionHelper";
+// import {getUserDetails, removeSessions} from "../../helper/SessionHelper";
 
 
 
@@ -14,9 +14,9 @@ const MasterLayout = (props) => {
 
     let contentRef,sideNavRef=useRef();
 
-    const onLogout=()=>{
-        removeSessions();
-    }
+    // const onLogout=()=>{
+    //     removeSessions();
+    // }
 
     const MenuBarClickHandler = () => {
         let sideNav = sideNavRef;
@@ -58,10 +58,9 @@ const MasterLayout = (props) => {
                                     <AiOutlineUser className="side-bar-item-icon" size={25} />
                                     <span className="side-bar-item-caption">Profile</span>
                                 </NavLink>
-                                <a onClick={onLogout}  className="side-bar-item">
+                                {/*<a onClick={onLogout}  className="side-bar-item"></a>*/}
                                     <AiOutlineLogout className="side-bar-item-icon" size={25} />
                                     <span className="side-bar-item-caption">Logout</span>
-                                </a>
                             </div>
                         </div>
                     </div>
