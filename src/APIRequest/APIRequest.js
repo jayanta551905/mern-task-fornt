@@ -1,71 +1,73 @@
 import axios from "axios";
 import {errorToast, successToast} from "../helper/FormHelper";
-// import store from "../redux/store/store";
-// import {HideLoader, ShowLoader} from "../redux/state/settings-slice";
-// import {getToken, setEmail, setOTP, setToken, setUserDetails} from "../helper/SessionHelper";
-// import {SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask} from "../redux/state/task-slice";
-// import {SetSummary} from "../redux/state/summary-slice";
-// import {SetProfile} from "../redux/state/profile-slice";
+import store from "../redux/store/store";
+import {hideLoader, showLoader} from "../redux/state/settings-slice";
+import {getToken, setEmail, setOTP, setToken, setUserDetails} from "../helper/SessionHelper";
+import {SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask} from "../redux/state/task-slice";
+import {SetSummary} from "../redux/state/summary-slice";
+import {SetProfile} from "../redux/state/profile-slice";
+
+
 const baseURL="http://localhost:5000/api/v1"
 
-// const AxiosHeader={headers:{"token":getToken()}}
+const AxiosHeader={headers:{"token":getToken()}}
 
-// export function NewTaskRequest(title,description){
-//
-//
-//     store.dispatch(ShowLoader())
-//
-//     let URL=BaseURL+"/createTask";
-//     let PostBody={"title":title,"description":description,status:"New"}
-//
-//     return axios.post(URL,PostBody,AxiosHeader).then((res)=>{
-//         store.dispatch(HideLoader())
-//         if(res.status===200){
-//             SuccessToast("New Task Created")
-//             return true;
-//         }
-//         else{
-//             ErrorToast("Something Went Wrong")
-//             return false;
-//         }
-//
-//     }).catch((err)=>{
-//         ErrorToast("Something Went Wrong")
-//         store.dispatch(HideLoader())
-//         return false;
-//     })
-// }
+export function NewTaskRequest(title,description){
 
 
-// export function LoginRequest(email,password){
-//     store.dispatch(ShowLoader())
-//     let URL=baseURL+"/login";
-//     let PostBody={"email":email,"password":password}
-//     return axios.post(URL,PostBody).then((res)=>{
-//         store.dispatch(HideLoader())
-//         if(res.status===200){
-//             setToken(res.data['token']);
-//             setUserDetails(res.data['data']);
-//             SuccessToast("Login Success")
-//             return true;
-//         }
-//         else{
-//             ErrorToast("Invalid Email or Password")
-//             return  false;
-//         }
-//     }).catch((err)=>{
-//         ErrorToast("Something Went Wrong")
-//         store.dispatch(HideLoader())
-//         return false;
-//     });
-// }
+    store.dispatch(showLoader())
+
+    let URL=baseURL+"/createTask";
+    let postBody={"title":title,"description":description}
+
+    return axios.post(URL,postBody,AxiosHeader).then((res)=>{
+        store.dispatch(hideLoader())
+        if(res.status===200){
+            successToast("New Task Created")
+            return true;
+        }
+        else{
+            errorToast("Something Went Wrong")
+            return false;
+        }
+
+    }).catch((err)=>{
+        errorToast("Something Went Wrong")
+        store.dispatch(hideLoader())
+        return false;
+    })
+}
+
+
+export function LoginRequest(email,password){
+    store.dispatch(showLoader())
+    let URL=baseURL+"/login";
+    let postBody={"email":email,"password":password}
+    return axios.post(URL,postBody).then((res)=>{
+        store.dispatch(hideLoader())
+        if(res.status===200){
+            setToken(res.data['token']);
+            setUserDetails(res.data['data']);
+            successToast("Login Success")
+            return true;
+        }
+        else{
+            errorToast("Invalid Email or Password")
+            return  false;
+        }
+    }).catch((err)=>{
+        errorToast("Something Went Wrong")
+        store.dispatch(hideLoader())
+        return false;
+    });
+}
 
 export function RegistrationRequest(email,firstName,lastName,mobile,password,photo){
-    // store.dispatch(ShowLoader())
+    store.dispatch(showLoader())
     let URL=baseURL+"/registration";
     let postBody={email:email,firstName:firstName,lastName:lastName,mobile:mobile,password:password, photo:photo}
     return axios.post(URL,postBody).then((res)=>{
-        // store.dispatch(HideLoader())
+        store.dispatch(hideLoader())
         if(res.status===200){
             if(res.data['status']==="Fail"){
                 if(res.data['data']['keyPattern']['email']===1){
@@ -87,7 +89,7 @@ export function RegistrationRequest(email,firstName,lastName,mobile,password,pho
             return  false;
         }
     }).catch((err)=>{
-        /*store.dispatch(HideLoader())*/
+        store.dispatch(hideLoader())
         errorToast("Something Went Wrong")
         return false;
     })

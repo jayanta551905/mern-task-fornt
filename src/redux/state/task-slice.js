@@ -8,20 +8,20 @@ export const taskSlice=createSlice({
         Canceled:[]
     },
     reducers:{
-        SetNewTask:(state,action)=>{
+        setNewTask:(state,action)=>{
             state.New=action.payload
         },
-        SetCompletedTask:(state,action)=>{
+        setCompletedTask:(state,action)=>{
             state.Completed=action.payload
         },
-        SetProgressTask:(state,action)=>{
+        setProgressTask:(state,action)=>{
             state.Progress=action.payload
         },
-        SetCanceledTask:(state,action)=>{
+        setCanceledTask:(state,action)=>{
             state.Canceled=action.payload
         }
 
     }
 })
-export  const {SetNewTask,SetCompletedTask,SetProgressTask,SetCanceledTask}=taskSlice.actions;
-export default  taskSlice.reducer;
+export  const {setNewTask,setCompletedTask,setProgressTask,setCanceledTask}=taskSlice.actions;
+export default taskSlice.reducer;

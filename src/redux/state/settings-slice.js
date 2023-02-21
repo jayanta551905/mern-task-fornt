@@ -5,13 +5,13 @@ export const settingsSlice=createSlice({
         loader:"d-none"
     },
     reducers:{
-        ShowLoader:(state)=>{
+        showLoader:(state)=>{
             state.loader=""
         },
-        HideLoader:(state)=>{
+        hideLoader:(state)=>{
             state.loader="d-none"
         }
     }
 })
-export  const {ShowLoader,HideLoader}=settingsSlice.actions;
+export  const {showLoader,hideLoader}=settingsSlice.actions;
 export default  settingsSlice.reducer;

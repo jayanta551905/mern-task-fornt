@@ -47,14 +47,19 @@ const Registration = () => {
                         <div className='card-body'>
                             <h4>Sign In</h4>
                             <br/>
+                            <label className='animated fadeInUp'>Email</label>
                             <input ref={(input)=>emailRef=input} placeholder='User Email' className='form-control animated fadeInUp' type="email"/>
                             <br/>
+                            <label className='animated fadeInUp'>First Name</label>
                             <input ref={(input)=>firstNameRef=input} placeholder='First Name' className='form-control animated fadeInUp' type="text"/>
                             <br/>
+                            <label className='animated fadeInUp'>Last Name</label>
                             <input ref={(input)=>lastNameRef=input} placeholder='Last Name' className='form-control animated fadeInUp' type="text"/>
                             <br/>
+                            <label className='animated fadeInUp'>Mobile No</label>
                             <input ref={(input)=>mobileRef=input} placeholder='Mobile' className='form-control animated fadeInUp' type="mobile"/>
                             <br/>
+                            <label className='animated fadeInUp'>Password</label>
                             <input ref={(input)=>passwordRef=input} placeholder='Password' className='form-control animated fadeInUp' type="password"/>
                             <br/>
                             <button onClick={onRegistration} className='btn btn-primary w-100 animated fadeInUp float-end'>Sign Up</button>
