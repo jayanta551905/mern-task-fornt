@@ -3,9 +3,9 @@ import {errorToast, successToast} from "../helper/FormHelper";
 import store from "../redux/store/store";
 import {hideLoader, showLoader} from "../redux/state/settings-slice";
 import {getToken, setEmail, setOTP, setToken, setUserDetails} from "../helper/SessionHelper";
-import {SetCanceledTask, SetCompletedTask, SetNewTask, SetProgressTask} from "../redux/state/task-slice";
-import {SetSummary} from "../redux/state/summary-slice";
+import {setSummary, SetSummary} from "../redux/state/summary-slice";
 import {SetProfile} from "../redux/state/profile-slice";
+import { setCanceledTask, setCompletedTask, setNewTask, setProgressTask } from "../redux/state/task-slice";
 
 
 const baseURL="http://localhost:5000/api/v1"
@@ -37,7 +37,6 @@ export function NewTaskRequest(title,description){
         return false;
     })
 }
-
 
 export function LoginRequest(email,password){
     store.dispatch(showLoader())
@@ -94,34 +93,53 @@ export function RegistrationRequest(email,firstName,lastName,mobile,password,pho
         return false;
     })
 }
-// export function TaskListByStatus(Status){
-//     store.dispatch(ShowLoader())
-//     let URL=BaseURL+"/listTaskByStatus/"+Status;
-//     axios.get(URL,AxiosHeader).then((res)=>{
-//         store.dispatch(HideLoader())
-//         if(res.status===200){
-//             if(Status==="New"){
-//                 store.dispatch(SetNewTask(res.data['data']))
-//             }
-//             else if(Status==="Completed"){
-//                 store.dispatch(SetCompletedTask(res.data['data']))
-//             }
-//             else if(Status==="Canceled"){
-//                 store.dispatch(SetCanceledTask(res.data['data']))
-//             }
-//             else if(Status==="Progress"){
-//                 debugger;
-//                 store.dispatch(SetProgressTask(res.data['data']))
-//             }
-//         }
-//         else{
-//             ErrorToast("Something Went Wrong")
-//         }
-//     }).catch((err)=>{
-//         ErrorToast("Something Went Wrong")
-//         store.dispatch(HideLoader())
-//     });
-// }
+
+export function TaskListByStatus(Status){
+    store.dispatch(showLoader())
+    let URL=baseURL+"/listTaskByStatus/"+Status;
+    axios.get(URL,AxiosHeader).then((res)=>{
+        store.dispatch(hideLoader())
+        if(res.status===200){
+            if(Status==="New"){
+                store.dispatch(setNewTask(res.data['data']))
+            }
+            else if(Status==="Completed"){
+                store.dispatch(setCompletedTask(res.data['data']))
+            }
+            else if(Status==="Canceled"){
+                store.dispatch(setCanceledTask(res.data['data']))
+            }
+            else if(Status==="Progress"){
+                store.dispatch(setProgressTask(res.data['data']))
+            }
+        }
+        else{
+            errorToast("Something Went Wrong")
+        }
+    }).catch((err)=>{
+        errorToast("Something Went Wrong")
+        store.dispatch(hideLoader())
+    });
+}
+
+export function SummaryRequest(){
+    store.dispatch(showLoader())
+    let URL = baseURL+"/taskStatusCount";
+    axios.get(URL, AxiosHeader).then((res)=>{
+        store.dispatch(hideLoader())
+        if (res.status===200){
+            store.dispatch(setSummary(res.data['data']))
+        }
+        else{
+            errorToast("Something went wrong")
+        }
+    }).catch((err)=>{
+        errorToast("Something went wrong")
+        store.dispatch(hideLoader())
+    })
+}
+
+
 // export function SummaryRequest(){
 //     store.dispatch(ShowLoader())
 //     let URL=BaseURL+"/taskStatusCount";
