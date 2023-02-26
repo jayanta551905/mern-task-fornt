@@ -3,7 +3,7 @@ import Container from "react-bootstrap/Container";
 import {AiOutlineCalendar, AiOutlineEdit, AiOutlineDelete} from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import { TaskListByStatus } from '../../APIRequest/APIRequest';
-import { deleteAlert } from '../../helper/DeleteAlert';
+import { DeleteAlert } from '../../helper/DeleteAlert';
 
 const New = () => {
 
@@ -12,6 +12,13 @@ const New = () => {
     },[]);
     
     const newList = useSelector((state)=>state.task.New);
+    const deleteItem = (id) =>{
+        DeleteAlert(id).then((result)=>{
+            if (result===true){
+                TaskListByStatus("New")
+            }
+        })   
+    }
 
     return (
         <Fragment>
@@ -42,7 +49,7 @@ const New = () => {
                                 <p className="m-0 p-0 animated fadeInUp">
                                     <AiOutlineCalendar/>{item.createdDate}
                                     <a className="icon-nav text-primary mx-1"><AiOutlineEdit/></a>
-                                    <a onClick={()=>deleteAlert(item._id)} className="icon-nav text-danger mx-1"><AiOutlineDelete/></a>
+                                    <a onClick={deleteItem.bind(this, item._id)} className="icon-nav text-danger mx-1"><AiOutlineDelete/></a>
                                     <a className="badge float-end bg-info">{item.status}</a>
                                 </p>
                             </div>

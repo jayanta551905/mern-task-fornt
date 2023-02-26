@@ -3,7 +3,7 @@ import {errorToast, successToast} from "../helper/FormHelper";
 import store from "../redux/store/store";
 import {hideLoader, showLoader} from "../redux/state/settings-slice";
 import {getToken, setEmail, setOTP, setToken, setUserDetails} from "../helper/SessionHelper";
-import {setSummary, SetSummary} from "../redux/state/summary-slice";
+import {setSummary} from "../redux/state/summary-slice";
 import {SetProfile} from "../redux/state/profile-slice";
 import { setCanceledTask, setCompletedTask, setNewTask, setProgressTask } from "../redux/state/task-slice";
 
@@ -139,42 +139,27 @@ export function SummaryRequest(){
     })
 }
 
+export function DeleteRequest(id){
+    store.dispatch(showLoader())
+    let URL=baseURL+"/deleteTask/"+id;
+    return axios.get(URL,AxiosHeader).then((res)=>{
+        store.dispatch(hideLoader())
+        if(res.status===200){
+            successToast("Delete Successful")
+            return true;
+        }
+        else{
+            errorToast("Something Went Wrong")
+            return false;
+        }
+    }).catch((err)=>{
+        errorToast("Something Went Wrong======>")
+        store.dispatch(hideLoader())
+        return false;
+    });
+}
 
-// export function SummaryRequest(){
-//     store.dispatch(ShowLoader())
-//     let URL=BaseURL+"/taskStatusCount";
-//     axios.get(URL,AxiosHeader).then((res)=>{
-//         store.dispatch(HideLoader())
-//         if(res.status===200){
-//             store.dispatch(SetSummary(res.data['data']))
-//         }
-//         else{
-//             ErrorToast("Something Went Wrong")
-//         }
-//     }).catch((err)=>{
-//         ErrorToast("Something Went Wrong")
-//         store.dispatch(HideLoader())
-//     });
-// }
-// export function DeleteRequest(id){
-//     store.dispatch(ShowLoader())
-//     let URL=BaseURL+"/deleteTask/"+id;
-//     return axios.get(URL,AxiosHeader).then((res)=>{
-//         store.dispatch(HideLoader())
-//         if(res.status===200){
-//             SuccessToast("Delete Successful")
-//             return true;
-//         }
-//         else{
-//             ErrorToast("Something Went Wrong")
-//             return false;
-//         }
-//     }).catch((err)=>{
-//         ErrorToast("Something Went Wrong")
-//         store.dispatch(HideLoader())
-//         return false;
-//     });
-// }
+
 // export function UpdateStatusRequest(id,status){
 //     store.dispatch(ShowLoader())
 //     let URL=BaseURL+"/updateTaskStatus/"+id+"/"+status;
