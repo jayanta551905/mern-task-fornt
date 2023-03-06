@@ -6,7 +6,7 @@ import {BsHourglass, BsListNested} from "react-icons/bs";
 import logo from "../../assets/images/logo.svg";
 import {MdOutlineCancelPresentation} from "react-icons/md";
 import {RiDashboardLine} from "react-icons/ri";
-// import {getUserDetails, removeSessions} from "../../helper/SessionHelper";
+import { getUserDetails, removeSessions } from "../../helper/SessionHelper";
 
 
 
@@ -14,9 +14,9 @@ const MasterLayout = (props) => {
 
     let contentRef,sideNavRef=useRef();
 
-    // const onLogout=()=>{
-    //     removeSessions();
-    // }
+    const onLogout=()=>{
+        removeSessions();
+    }
 
     const MenuBarClickHandler = () => {
         let sideNav = sideNavRef;
@@ -47,20 +47,21 @@ const MasterLayout = (props) => {
 
                     <div className="float-right h-auto d-flex">
                         <div className="user-dropdown">
-                            {/*<img className="icon-nav-img icon-nav" src={getUserDetails()} alt=""/>*/}
+                            <img className="icon-nav-img icon-nav" src={getUserDetails()} alt=""/>
                             <div className="user-dropdown-content ">
                                 <div className="mt-4 text-center">
-                                    {/*<img className="icon-nav-img" src={getUserDetails()} alt=""/>*/}
-                                    {/*<h6>{getUserDetails()['firstName']}</h6>*/}
+                                    <img className="icon-nav-img" src={getUserDetails()} alt=""/>
+                                    <h6>{getUserDetails()['firstName']}</h6>
                                     <hr className="user-dropdown-divider  p-0"/>
                                 </div>
                                 <NavLink to="/Profile" className="side-bar-item">
                                     <AiOutlineUser className="side-bar-item-icon" size={25} />
                                     <span className="side-bar-item-caption">Profile</span>
                                 </NavLink>
-                                {/*<a onClick={onLogout}  className="side-bar-item"></a>*/}
-                                    <AiOutlineLogout className="side-bar-item-icon" size={25} />
+                                <a onClick={onLogout}  className="side-bar-item">
+                                    <AiOutlineLogout className="side-bar-item-icon" />
                                     <span className="side-bar-item-caption">Logout</span>
+                                </a>
                             </div>
                         </div>
                     </div>

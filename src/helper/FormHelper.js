@@ -23,10 +23,10 @@ class FormHelper {
         return !emailRegx.test(value);
     }
     errorToast(msg){
-        cogoToast.error(msg, {position:"bottom-center"})
+        cogoToast.error(msg, {position:"top-center"})
     }
     successToast(msg){
-        cogoToast.success(msg, {position: "bottom-center"})
+        cogoToast.success(msg, {position: "top-center"})
     }
 }
 
