@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
-import { GetProfileDetails } from '../../APIRequest/APIRequest';
+import { GetProfileDetails, ProfileUpdateRequest } from '../../APIRequest/APIRequest';
 import { useSelector } from 'react-redux';
-import { errorToast, isEmail, isEmpty, isMobile } from '../../helper/FormHelper';
+import { errorToast, getBase64, isEmail, isEmpty, isMobile } from '../../helper/FormHelper';
 import { useNavigate } from 'react-router';
 
 const Profile = () => {
@@ -51,7 +51,7 @@ const Profile = () => {
             errorToast("Password Required !")
         }
         else{
-            profileUpdateRequest(email,fastName,lastName,mobile,password,photo).then((result)=>{
+            ProfileUpdateRequest(email,fastName,lastName,mobile,password,photo).then((result)=>{
                 if(result===true){
                     navigate("/")
                 }
