@@ -15,7 +15,7 @@ const SendOTP = () => {
         else{
             RecoverVerifyEmailRequest(email).then((result)=>{
                 if(result===true){
-                    navigate("/VerifyOTP")
+                    navigate("/verifyOTP")
                 }
             })
         }

@@ -35,7 +35,7 @@ const VerifyOTP = () => {
       if(OTP.length===6){
           RecoverVerifyOTPRequest(getEmail(),OTP).then((result)=>{
               if(result===true){
-                  navigate("/CreatePassword")
+                  navigate("/createPassword")
               }
           })
       }

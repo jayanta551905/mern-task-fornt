@@ -43,7 +43,7 @@ const Login = () => {
                                 <div className='text-center w-100'>
                                     <Link className='text-center animated fadeInUp to=' to="/registration">Sign Up</Link>
                                     <br/>
-                                    <Link className='text-center animated fadeInUp' to="/forgetPass">Forget Password</Link>
+                                    <Link className='text-center animated fadeInUp' to="/sendOTP">Forget Password</Link>
                                 </div>
                             </div>
                         </div>
